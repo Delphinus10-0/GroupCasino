@@ -5,134 +5,42 @@ import com.github.zipcodewilmington.casino.games.Trivia.Questions;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class TriviaTest {
 
 
-//1
+//Test if the answer is correct
 @Test
-    public void getPlayerAnswerTest1(){
+public void testCheckAnswerCorrect() {
     Trivia trivia = new Trivia();
-
-    String playerAnswer = "";
-    String expectedAnswer = "";
-    String actualAnswer = trivia.getPlayerAnswer(playerAnswer);
-
-    assertEquals(expectedAnswer, actualAnswer);
+    assertTrue(trivia.checkAnswer("Pacific Ocean", 4));
 }
 
-    //1.1
     @Test
-    public void getPlayerAnswerTest2(){
+    public void testIncorrectAnswer() {
         Trivia trivia = new Trivia();
-
-        String playerAnswer = "";
-        String expectedAnswer = "";
-        String actualAnswer = trivia.getPlayerAnswer(playerAnswer);
-
-        assertEquals(expectedAnswer, actualAnswer);
+        assertFalse(trivia.checkAnswer("Arctic Ocean", 4));
     }
 
-    //1.2
+
+//Test if the score is updating
+@Test
+    public void testUpdateScore(){
+    Trivia trivia = new Trivia();
+    trivia.updateScore(true);
+    assertEquals(1, trivia.currentScore);
+}
+
     @Test
-    public void getPlayerAnswerTest3(){
+    public void testNotUpdateScore(){
         Trivia trivia = new Trivia();
-
-        String playerAnswer = "";
-        String expectedAnswer = "";
-        String actualAnswer = trivia.getPlayerAnswer(playerAnswer);
-
-        assertEquals(expectedAnswer, actualAnswer);
-    }
-
-
-//2
-    @Test
-    public void checkAnswerTest1(){
-        Trivia trivia = new Trivia();
-
-
-        Boolean expectedAnswer = true;
-        String question = "";
-
-        String actualAnswer = trivia.checkAnswer(question);
-
-        assertEquals(expectedAnswer, actualAnswer);
-    }
-
-
-    //2.1
-    @Test
-    public void checkAnswerTest2(){
-        Trivia trivia = new Trivia();
-
-
-        Boolean expectedAnswer = true;
-        String question = "";
-
-        String actualAnswer = trivia.checkAnswer(question);
-
-        assertEquals(expectedAnswer, actualAnswer);
-    }
-
-    //2.2
-    @Test
-    public void checkAnswerTest3(){
-        Trivia trivia = new Trivia();
-
-
-        Boolean expectedAnswer = true;
-        String question = "";
-
-        String actualAnswer = trivia.checkAnswer(question);
-
-        assertEquals(expectedAnswer, actualAnswer);
+        trivia.updateScore(false);
+        assertEquals(0, trivia.currentScore);
     }
 
 
 
-    //3
-    @Test
-    public void updateScoreTest1(){
-        Questions questions = new Questions();
-
-
-        String expectedAnswer = "";
-
-
-        String actualAnswer = questions.getCorrectAnswer();
-
-        assertEquals(expectedAnswer, actualAnswer);
-    }
-
-    //3.1
-    @Test
-    public void updateScoreTest2(){
-        Questions questions = new Questions();
-
-
-        String expectedAnswer = "";
-
-
-        String actualAnswer = questions.getCorrectAnswer();
-
-        assertEquals(expectedAnswer, actualAnswer);
-    }
-
-    //3.2
-    @Test
-    public void updateScoreTest3(){
-        Questions questions = new Questions();
-
-
-        String expectedAnswer = "";
-
-
-        String actualAnswer = questions.getCorrectAnswer();
-
-        assertEquals(expectedAnswer, actualAnswer);
-    }
 
 
 

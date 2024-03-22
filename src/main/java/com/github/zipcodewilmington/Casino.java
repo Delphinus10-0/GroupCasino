@@ -1,10 +1,22 @@
 package com.github.zipcodewilmington;
+
+
+import com.github.zipcodewilmington.casino.*;
+
+//import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardGame;
+//import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardPlayer;
+import com.github.zipcodewilmington.casino.games.BlackJack.BlackJack;
+import com.github.zipcodewilmington.casino.games.BlackJack.BlackJackPlayer;
+import com.github.zipcodewilmington.casino.games.Trivia.Trivia;
+import com.github.zipcodewilmington.casino.games.Trivia.TriviaPlayer;
+
 import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.CasinoAccountManager;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
-import com.github.zipcodewilmington.casino.games.slots.SlotGame;
+import com.github.zipcodewilmington.casino.games.slots.SlotMachine;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
+
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 //M
@@ -34,8 +46,15 @@ public class Casino implements Runnable {
                 if (isValidLogin) {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
                     if (gameSelectionInput.equals("SLOTS")) {
-                        play(new SlotGame(), new SlotsPlayer());
-                    } else {
+                        play(new SlotMachine(), new SlotsPlayer());
+//                    } else if (gameSelectionInput.equals("NUMBERGUESS")) {
+//                        play(new HigherCardGame(), new HigherCardPlayer());
+
+                    } else if (gameSelectionInput.equals("Trivia")){
+                            play(new Trivia(), new TriviaPlayer(casinoAccount));
+                        }
+
+                     else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
                         throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
