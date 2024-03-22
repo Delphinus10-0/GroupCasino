@@ -46,7 +46,7 @@ public class Casino implements Runnable {
         casinoAccountManager.readFile();
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();
-            if ("s".equals(arcadeDashBoardInput)) {
+            if ("select-game".equals(arcadeDashBoardInput)) {
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);

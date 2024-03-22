@@ -12,10 +12,5 @@ public interface PlayerInterface {
      */
     CasinoAccount getArcadeAccount();
 
-    /**
-     * Defines how a specific implementation of `PlayerInterface` plays their respective game.
-     * @param <> specify any return type you would like here
-     * @return whatever return value you would like
-     */
-    Boolean play();
+    <SomeReturnType> SomeReturnType play();
 }
