@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 public class HigherCardTest {
-    Player player1 = new Player("Ann", 2000, 21);
+    Player player1 = new Player("Ann", 2000);
     HigherCardGame higherCardGame = new HigherCardGame(player1);
 
     @Test
