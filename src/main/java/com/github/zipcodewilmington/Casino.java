@@ -10,6 +10,7 @@ import com.github.zipcodewilmington.casino.games.BlackJack.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.FlipTheCoin.FlipCoin;
 import com.github.zipcodewilmington.casino.games.FlipTheCoin.FlipCoinPlayer;
 import com.github.zipcodewilmington.casino.games.Trivia.Trivia;
+//import com.github.zipcodewilmington.casino.games.Trivia.TriviaPlayer;
 import com.github.zipcodewilmington.casino.games.Trivia.TriviaPlayer;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
@@ -83,6 +84,7 @@ public class Casino implements Runnable {
                 CasinoAccount newAccount = casinoAccountManager.createAccount(accountName, accountPassword);
                 casinoAccountManager.registerAccount(newAccount);
             }
+            // Save account manager state after operations
             casinoAccountManager.saveFile();
         } while (!"logout".equals(arcadeDashBoardInput));
     }
@@ -99,7 +101,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ BLACKJACK ], [ HIGHERCARDS ], [ TRIVIA ], [ FLIPCOIN ]")
+                .append("\n\t[ SLOTS ], [ BLACKJACK ], [HIGHER CARD], [ TRIVIA ], [ FLIPCOIN ]")
                 .toString());
     }
 
