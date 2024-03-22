@@ -28,6 +28,9 @@ public abstract class CardGame implements GameInterface {
         dealHands(handSize);
     }
 
+    public CardGame(Player player) {
+    }
+
     public String showHand(Player player) {
         StringBuilder sb = new StringBuilder();
         for(Card c : playerHands.get(player)){
@@ -54,5 +57,22 @@ public abstract class CardGame implements GameInterface {
 
     public Player getDealer(){
         return this.dealer;
+    }
+    @Override
+    public void play() {
+    }
+    @Override
+    public void nextTurn() {
+    }
+    @Override
+    public Boolean checkGameState() {
+        return null;
+    }
+    @Override
+    public String printGameRules() {
+        return null;
+    }
+    @Override
+    public void exit() {
     }
 }
