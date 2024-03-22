@@ -13,14 +13,18 @@ import java.util.ArrayList;
 
 public class HigherCardGame implements GameInterface {
 
-    IOConsole console = new IOConsole();
-    DeckCards deck = new DeckCards();
-    Player player1;
-    boolean playAgain = true;
+    
+    public IOConsole console = new IOConsole();
+    public DeckCards deck = new DeckCards();
+    public Player player1;
+    public boolean playAgain = true;
     int player, croupier;
-    private Double bet;
+    public Double bet;
 
     public HigherCardGame(){
+    }
+
+    public HigherCardGame(Player player) {
     }
 
     @Override
