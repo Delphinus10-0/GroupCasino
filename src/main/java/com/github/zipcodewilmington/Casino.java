@@ -1,14 +1,34 @@
 package com.github.zipcodewilmington;
 
+
 import com.github.zipcodewilmington.casino.*;
 
 //import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardGame;
 //import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardPlayer;
 import com.github.zipcodewilmington.casino.games.BlackJack.BlackJack;
 import com.github.zipcodewilmington.casino.games.BlackJack.BlackJackPlayer;
+import com.github.zipcodewilmington.casino.games.FlipTheCoin.FlipCoin;
+import com.github.zipcodewilmington.casino.games.FlipTheCoin.FlipCoinPlayer;
 import com.github.zipcodewilmington.casino.games.Trivia.Trivia;
 //import com.github.zipcodewilmington.casino.games.Trivia.TriviaPlayer;
 import com.github.zipcodewilmington.casino.games.Trivia.TriviaPlayer;
+
+import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.CasinoAccountManager;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+import com.github.zipcodewilmington.casino.games.slots.SlotGame;
+import com.github.zipcodewilmington.casino.games.slots.SlotGame;
+
+//import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardGame;
+//import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardPlayer;
+import com.github.zipcodewilmington.casino.games.BlackJack.BlackJack;
+import com.github.zipcodewilmington.casino.games.BlackJack.BlackJackPlayer;
+import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardGame;
+import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardPlayer;
+import com.github.zipcodewilmington.casino.games.slots.SlotGame;
+import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
+
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 //M
@@ -37,38 +57,36 @@ public class Casino implements Runnable {
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
-
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
-                    switch (gameSelectionInput) {
-                        case "BLACKJACK":
-                            play(new BlackJack(), new BlackJackPlayer(casinoAccount));
-                            break;
-                        case "TRIVIA":
-                            play(new Trivia(), new TriviaPlayer(casinoAccount)); // Ensure this line executes
-                            break;
-                        default:
-                            console.println("Invalid game selection. Please try again.");
-                            break;
+                    if (gameSelectionInput.equalsIgnoreCase("SLOTS")) {
+                        play(new SlotGame(), new SlotsPlayer(casinoAccount));
+                    }else if (gameSelectionInput.equalsIgnoreCase("BLACKJACK")) {
+                        play(new BlackJack(), new BlackJackPlayer(casinoAccount));
+                    } else if (gameSelectionInput.equalsIgnoreCase("HIGHERCARDS")) {
+                        play(new HigherCardGame(), new HigherCardPlayer(casinoAccount));
+                    } else if (gameSelectionInput.equalsIgnoreCase("TRIVIA")) {
+                        play(new Trivia(), new TriviaPlayer(casinoAccount));
+                    } else if (gameSelectionInput.equalsIgnoreCase("FLIPCOIN")) {
+                        play(new FlipCoin(), new FlipCoinPlayer(casinoAccount));
+                    } else {
+                        String errorMessage = "[ %s ] is an invalid game selection";
+                        throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
                     }
                 } else {
-                    // Handle invalid login
+                    // TODO - implement better exception handling
                     String errorMessage = "No account found with name of [ %s ] and password of [ %s ]";
-                    throw new RuntimeException(String.format(errorMessage, accountName, accountPassword));
+                    throw new RuntimeException(String.format(errorMessage, accountPassword, accountName));
                 }
             } else if ("create-account".equals(arcadeDashBoardInput)) {
-                // Handle account creation
+                console.println("Welcome to the account-creation screen.");
+                String accountName = console.getStringInput("Enter your account name:");
+                String accountPassword = console.getStringInput("Enter your account password:");
+                CasinoAccount newAccount = casinoAccountManager.createAccount(accountName, accountPassword);
+                casinoAccountManager.registerAccount(newAccount);
             }
             // Save account manager state after operations
             casinoAccountManager.saveFile();
         } while (!"logout".equals(arcadeDashBoardInput));
-    }
-
-    private String getGameSelectionInput() {
-        return console.getStringInput(new StringBuilder()
-                .append("Welcome to the Game Selection Dashboard!")
-                .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ BLACKJACK ], [ TRIVIA ]") // Added TRIVIA as an option
-                .toString());
     }
 
     private String getArcadeDashboardInput() {
@@ -79,10 +97,17 @@ public class Casino implements Runnable {
                 .toString());
     }
 
+    private String getGameSelectionInput() {
+        return console.getStringInput(new StringBuilder()
+                .append("Welcome to the Game Selection Dashboard!")
+                .append("\nFrom here, you can select any of the following options:")
+                .append("\n\t[ BLACKJACK ], [HIGHER CARD]")
+                .toString());
+    }
 
     private void play(Object gameObject, Object playerObject) {
-        GameInterface game = (GameInterface) gameObject;
-        PlayerInterface player = (PlayerInterface) playerObject;
+        GameInterface game = (GameInterface)gameObject;
+        PlayerInterface player = (PlayerInterface)playerObject;
         game.add(player);
         game.run();
     }
