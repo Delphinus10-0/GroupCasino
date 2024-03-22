@@ -5,21 +5,26 @@ import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.games.Trivia.Trivia;
 
 public class TriviaPlayer implements PlayerInterface {
-    private CasinoAccount arcadeAccount;
+    private final int totalChips;
+    private CasinoAccount casinoAccount;
 
-    public TriviaPlayer(CasinoAccount arcadeAccount) {
-        this.arcadeAccount = arcadeAccount;
+    public TriviaPlayer(CasinoAccount casinoAccount) {
+        this.casinoAccount = casinoAccount;
+        this.totalChips = casinoAccount.getBalance();
+        
     }
 
     @Override
     public CasinoAccount getArcadeAccount() {
-        return arcadeAccount;
+        return casinoAccount;
     }
 
     @Override
     public Boolean play() {
-        Trivia trivia = new Trivia();
-        trivia.play();
-        return true;
+        return this.play();
+    }
+    @Override
+    public Double placeBets(double moneyToBet) {
+        return moneyToBet;
     }
 }

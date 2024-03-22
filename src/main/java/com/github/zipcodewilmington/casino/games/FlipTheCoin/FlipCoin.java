@@ -147,6 +147,11 @@ public class FlipCoin implements GameInterface {
     }
 
     @Override
+    public void Runplay() {
+
+    }
+
+    @Override
     public boolean add(PlayerInterface player) {
         player1= new Player(player.getArcadeAccount().getName(),player.getArcadeAccount().getBalance());
         return true;

@@ -16,8 +16,7 @@ public class HigherCardPlayer implements PlayerInterface, GamblingGame {
     public HigherCardPlayer(CasinoAccount casinoAccount) {
         this.casinoAccount = casinoAccount;
         this.totalChips = casinoAccount.getBalance();
-        // initializing win/loss tally
-        System.out.println("Inside player constructor {}" + casinoAccount.getBalance());
+
     }
 
     @Override

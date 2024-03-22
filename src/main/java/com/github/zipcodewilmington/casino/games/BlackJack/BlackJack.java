@@ -19,6 +19,12 @@ public class BlackJack implements GameInterface {
     //DeckCards deck = new DeckCards();
     BlackJackDeck deck = new BlackJackDeck();
     BlackJackPlayer dealer = new BlackJackPlayer(new CasinoAccount("Mills", "FM111123"));
+
+    @Override
+    public void Runplay() {
+
+    }
+
     @Override
     public boolean add(PlayerInterface player) {
         return players.add(player);

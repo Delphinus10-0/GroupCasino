@@ -15,8 +15,8 @@ public class Trivia implements GameInterface {
   int score = 0;
   Player player1;
 
-
-  public Trivia () {
+  @Override
+  public void run () {
     trivia = new HashMap<>();
     currentScore = 0;
     input = new Scanner(System.in);
@@ -110,8 +110,14 @@ public class Trivia implements GameInterface {
     }
 
   @Override
+  public void Runplay() {
+
+  }
+
+  @Override
   public boolean add(PlayerInterface player) {
-    return false;
+    player1 = new Player(player.getArcadeAccount().getName(),player.getArcadeAccount().getBalance());
+    return true;
   }
 
   @Override
@@ -119,10 +125,6 @@ public class Trivia implements GameInterface {
     return false;
   }
 
-  @Override
-  public void run() {
-
-  }
 
   public void play (){
       for(Map.Entry<Integer, Questions> entry : trivia.entrySet()){

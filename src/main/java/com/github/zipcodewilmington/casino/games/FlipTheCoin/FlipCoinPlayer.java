@@ -18,7 +18,11 @@ public class FlipCoinPlayer implements PlayerInterface {
 
    @Override
    public Boolean play() {
-        return true;
+        return this.play();
+    }
+    @Override
+    public Double placeBets(double moneyToBet) {
+        return moneyToBet;
     }
 
 //    @Override
