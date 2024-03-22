@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class FlipTheCoinTest {
-///+ playGame(): void
+///+ run(): void
 //+ getBet(): int
 //+ setBet(amount: int): void
 // + setCoinSide(side:CoinSide: String)
@@ -64,4 +64,6 @@ public class FlipTheCoinTest {
         boolean actual = flipTheCoin.checkForWin();
         assertTrue(actual);
     }
+
+
 }

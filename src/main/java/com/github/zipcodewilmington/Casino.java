@@ -7,6 +7,8 @@ import com.github.zipcodewilmington.casino.*;
 //import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardPlayer;
 import com.github.zipcodewilmington.casino.games.BlackJack.BlackJack;
 import com.github.zipcodewilmington.casino.games.BlackJack.BlackJackPlayer;
+import com.github.zipcodewilmington.casino.games.FlipTheCoin.FlipCoin;
+import com.github.zipcodewilmington.casino.games.FlipTheCoin.FlipCoinPlayer;
 import com.github.zipcodewilmington.casino.games.Trivia.Trivia;
 import com.github.zipcodewilmington.casino.games.Trivia.TriviaPlayer;
 
@@ -55,12 +57,14 @@ public class Casino implements Runnable {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
                     if (gameSelectionInput.equalsIgnoreCase("SLOTS")) {
                         play(new SlotMachine(), new SlotsPlayer());
-                    }else if (gameSelectionInput.equalsIgnoreCase("b")) {
+                    }else if (gameSelectionInput.equalsIgnoreCase("BLACKJACK")) {
                         play(new BlackJack(), new BlackJackPlayer(casinoAccount));
-                    } else if (gameSelectionInput.equalsIgnoreCase("H")) {
+                    } else if (gameSelectionInput.equalsIgnoreCase("HIGHERCARDS")) {
                         play(new HigherCardGame(), new HigherCardPlayer(casinoAccount));
-                    } else if (gameSelectionInput.equalsIgnoreCase("TRIVIA")){
-                            play(new Trivia(), new TriviaPlayer(casinoAccount));
+                    } else if (gameSelectionInput.equalsIgnoreCase("TRIVIA")) {
+                        play(new Trivia(), new TriviaPlayer(casinoAccount));
+                    } else if (gameSelectionInput.equalsIgnoreCase("FLIPCOIN")) {
+                        play(new FlipCoin(), new FlipCoinPlayer(casinoAccount));
                     } else {
                         String errorMessage = "[ %s ] is an invalid game selection";
                         throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
@@ -93,7 +97,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [HIGHER CARD]")
+                .append("\n\t[ SLOTS ], [ BLACKJACK ], [ HIGHERCARDS ], [ TRIVIA ], [ FLIPCOIN ]")
                 .toString());
     }
 

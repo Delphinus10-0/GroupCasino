@@ -1,24 +1,23 @@
 package com.github.zipcodewilmington.casino.games.FlipTheCoin;
 
 
-import com.github.zipcodewilmington.utils.Suit;
+import com.github.zipcodewilmington.Player;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
 
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class FlipCoin {
+public class FlipCoin implements GameInterface {
     CoinSide selectedCoinSide;
     CoinSide winningSide = CoinSide.HEAD;
     int bet = 1;
     Balance balance = new Balance(0);
     Scanner scanner = new Scanner(System.in);
+    Player player1;
 
-    public static void main(String[] arg){
-        new FlipCoin().playGame();
-    }
-
-    public void playGame() {
+    @Override
+    public void run() {
         System.out.println("Welcome to the FlipCoin Game! Please flip the coin and may the luck be with you!");
         boolean isYesAnswer;
         int value;
@@ -145,5 +144,52 @@ public class FlipCoin {
 
     public CoinSide getCoinSide(){
         return CoinSide.TAIL;
+    }
+
+    @Override
+    public boolean add(PlayerInterface player) {
+        player1= new Player(player.getArcadeAccount().getName(),player.getArcadeAccount().getBalance());
+        return true;
+    }
+
+    @Override
+    public boolean remove(PlayerInterface player) {
+        return false;
+    }
+
+
+    @Override
+    public void play() {
+
+    }
+
+    @Override
+    public void nextTurn() {
+
+    }
+
+    @Override
+    public Boolean checkGameState() {
+        return null;
+    }
+
+    @Override
+    public String printGameRules() {
+        return null;
+    }
+
+    @Override
+    public void exit() {
+
+    }
+
+    @Override
+    public boolean quit() {
+        return false;
+    }
+
+    @Override
+    public boolean playAgain(String prompt) {
+        return false;
     }
 }

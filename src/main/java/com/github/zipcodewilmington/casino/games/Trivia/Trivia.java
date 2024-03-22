@@ -1,17 +1,22 @@
 package com.github.zipcodewilmington.casino.games.Trivia;
+import com.github.zipcodewilmington.Player;
+import com.github.zipcodewilmington.casino.GameInterface;
+import com.github.zipcodewilmington.casino.PlayerInterface;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class Trivia {
+public class Trivia implements GameInterface {
   HashMap<Integer, Questions> trivia;
   public int currentScore;
   Scanner input;
   int score = 0;
+  Player player1;
 
 
-  public Trivia() {
+  public Trivia () {
     trivia = new HashMap<>();
     currentScore = 0;
     input = new Scanner(System.in);
@@ -104,7 +109,22 @@ public class Trivia {
         trivia.put(40, new Questions("What is the largest island in the world?", Arrays.asList("A. New Guinea", "B. Borneo", "C. Madagascar", "D. Greenland"), "Greenland"));
     }
 
-    public void play (){
+  @Override
+  public boolean add(PlayerInterface player) {
+    return false;
+  }
+
+  @Override
+  public boolean remove(PlayerInterface player) {
+    return false;
+  }
+
+  @Override
+  public void run() {
+
+  }
+
+  public void play (){
       for(Map.Entry<Integer, Questions> entry : trivia.entrySet()){
         askQuestion(entry.getKey());
         String playerAnswer = getPlayerAnswer();
@@ -113,8 +133,38 @@ public class Trivia {
       }
     }
 
+  @Override
+  public void nextTurn() {
 
-    //why not public?
+  }
+
+  @Override
+  public Boolean checkGameState() {
+    return null;
+  }
+
+  @Override
+  public String printGameRules() {
+    return null;
+  }
+
+  @Override
+  public void exit() {
+
+  }
+
+  @Override
+  public boolean quit() {
+    return false;
+  }
+
+  @Override
+  public boolean playAgain(String prompt) {
+    return false;
+  }
+
+
+  //why not public?
     private void askQuestion(Integer identifier){
         Questions question = trivia.get(identifier);
       System.out.println("\n" + question.getText());
