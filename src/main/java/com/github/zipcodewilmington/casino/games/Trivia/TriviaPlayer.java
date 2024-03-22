@@ -16,10 +16,14 @@ public class TriviaPlayer implements PlayerInterface {
         return arcadeAccount;
     }
 
+
+    //
     @Override
     public Boolean play() {
         Trivia trivia = new Trivia();
         trivia.play();
         return true;
     }
+
+
 }
