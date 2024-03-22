@@ -44,9 +44,6 @@ public class Casino implements Runnable {
                     else if (gameSelectionInput.equals("NUMBERGUESS")) {
                        // play(new HigherCardGame(), new HigherCardPlayer());
                     }
-                    else if (gameSelectionInput.equals("BLACKJACK")){
-                        play(new BlackJack(), new BlackJackPlayer(casinoAccount));
-                    }
                     else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
@@ -79,7 +76,7 @@ public class Casino implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ HIGHER CARD ], [ BLACKJACK ]")
+                .append("\n\t[ SLOTS ], [ HIGHER CARD ]")
                 .toString());
     }
 
