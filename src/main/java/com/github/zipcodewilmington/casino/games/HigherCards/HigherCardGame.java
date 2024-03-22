@@ -4,11 +4,14 @@ package com.github.zipcodewilmington.casino.games.HigherCards;
  * Created by leon on 7/21/2020.
  */
 import com.github.zipcodewilmington.Player;
+import com.github.zipcodewilmington.casino.CasinoAccount;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 import com.github.zipcodewilmington.utils.*;
 
-public class HigherCardGame extends CardGame implements GameInterface {
+import java.util.ArrayList;
+
+public class HigherCardGame implements GameInterface {
 
     IOConsole console = new IOConsole();
     DeckCards deck = new DeckCards();
@@ -17,15 +20,15 @@ public class HigherCardGame extends CardGame implements GameInterface {
     int player, croupier;
     private Double bet;
 
-    public HigherCardGame(Player player) {
-        super(player);
+    public HigherCardGame(){
     }
 
     @Override
     public boolean add(PlayerInterface player) {
-        return false;
+        player1= new Player(player.getArcadeAccount().getName(),player.getArcadeAccount().getBalance());
+        //TODO: change this
+        return true;
     }
-
     @Override
     public boolean remove(PlayerInterface player) {
         return false;
@@ -33,7 +36,7 @@ public class HigherCardGame extends CardGame implements GameInterface {
 
     @Override
     public void run() {
-
+        play();
     }
 
     @Override
@@ -49,14 +52,14 @@ public class HigherCardGame extends CardGame implements GameInterface {
             houseDrawingCard();
 
             findWinner(wageAmount, player, croupier);
-            console.println("Your current available Chips: " + player1.getTotalChips());
+            console.println("Your current available balance: " + player1.getTotalChips());
             repeat();
         }
     }
 
     public void repeat() {
         if(player1.getTotalChips() == 0) {
-            console.println("You are out of chips. You may no longer play\n");
+            console.println("You are out of balance. You may no longer play\n");
             playAgain = false;
         } else if(console.getStringInput("Would you like to play again?").equalsIgnoreCase("no")) {
             playAgain = false;
@@ -82,17 +85,11 @@ public class HigherCardGame extends CardGame implements GameInterface {
     public void findWinner(Double wageAmount, int playerCardValue, int croupierCardValue) {
         if (playerCardValue > croupierCardValue) {
             console.println("Congrats! You Won");
-            int[] change = {player1.getTally()[0] + 1, player1.getTally()[1]};
-            player1.setTally(change);
             player1.setTotalChips((int) (player1.getTotalChips() + wageAmount));
         } else {
             console.println("You Lose");
-            int[] change = {player1.getTally()[0], player1.getTally()[1] + 1};
-            player1.setTally(change);
             player1.setTotalChips((int) (player1.getTotalChips() - wageAmount));
         }
-        console.println("Your current Win/Loss Ratio is " + player1.getTally()[0] + "/" +
-                player1.getTally()[1] + "\n");
     }
 
     public Double wageMoney() {
@@ -107,13 +104,13 @@ public class HigherCardGame extends CardGame implements GameInterface {
     }
 
     public void printCard(String suitSymbol, String playerFace) {
-        console.println(" ---------");
-        console.println("| %s %s |", playerFace, suitSymbol);
+        console.println("-------------");
+        console.println("| %s %s       |", playerFace, suitSymbol);
         for(int i = 0; i < 5; i++) {
             console.println("|           |");
         }
-        console.println("| %s %s |", suitSymbol, playerFace);
-        console.println("---------");
+        console.println("| %s %s       |", suitSymbol, playerFace);
+        console.println("-------------");
     }
 
 
