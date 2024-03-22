@@ -1,17 +1,19 @@
 package com.github.zipcodewilmington.casino.games.slots;
-import com.github.zipcodewilmington.casino.Gambler;
+import com.github.zipcodewilmington.Player;
 import com.github.zipcodewilmington.casino.GameInterface;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
 import java.util.Random;
 import java.util.Scanner;
-public class SlotMachine implements Gambler {
+public class SlotGame implements GameInterface {
     private static final int JACKPOT_MULTIPLIER = 100;
     private static final int MATCH_MULTIPLIER = 10;
-    public static void main(String[] args) {
+    Player player1;
+    @Override
+    public void Runplay(){
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        System.out.println("Welcome to the Slot Machine!");
+        System.out.println("Welcome to the SlotGame!");
         System.out.println("Press Enter to spin the reels. Type 'exit' to quit.");
         while (playGame(scanner, random)) {
             System.out.print("Do you want to play again? (yes/no): ");
@@ -56,10 +58,42 @@ public class SlotMachine implements Gambler {
             return 0;
         }
     }
+
     @Override
-    public void withdraw(Integer amount) {
+    public boolean add(PlayerInterface player) {
+        player1= new Player(player.getArcadeAccount().getName(),player.getArcadeAccount().getBalance());
+        return true;
     }
     @Override
-    public void deposit(Integer amount) {
+    public boolean remove(PlayerInterface player) {
+        return false;
+    }
+    @Override
+    public void run() {
+    }
+    @Override
+    public void play() {
+    }
+    @Override
+    public void nextTurn() {
+    }
+    @Override
+    public Boolean checkGameState() {
+        return null;
+    }
+    @Override
+    public String printGameRules() {
+        return null;
+    }
+    @Override
+    public void exit() {
+    }
+    @Override
+    public boolean quit() {
+        return false;
+    }
+    @Override
+    public boolean playAgain(String prompt) {
+        return false;
     }
 }
