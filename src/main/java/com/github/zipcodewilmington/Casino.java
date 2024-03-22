@@ -21,7 +21,7 @@ import com.github.zipcodewilmington.casino.games.BlackJack.BlackJack;
 import com.github.zipcodewilmington.casino.games.BlackJack.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardGame;
 import com.github.zipcodewilmington.casino.games.HigherCards.HigherCardPlayer;
-import com.github.zipcodewilmington.casino.games.slots.SlotsGame;
+import com.github.zipcodewilmington.casino.games.slots.SlotMachine;
 import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 
 import com.github.zipcodewilmington.utils.AnsiColor;
@@ -46,24 +46,22 @@ public class Casino implements Runnable {
         casinoAccountManager.readFile();
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();
-            if ("select-game".equals(arcadeDashBoardInput)) {
+            if ("s".equals(arcadeDashBoardInput)) {
                 String accountName = console.getStringInput("Enter your account name:");
                 String accountPassword = console.getStringInput("Enter your account password:");
                 CasinoAccount casinoAccount = casinoAccountManager.getAccount(accountName, accountPassword);
                 boolean isValidLogin = casinoAccount != null;
                 if (isValidLogin) {
                     String gameSelectionInput = getGameSelectionInput().toUpperCase();
-                    if (gameSelectionInput.equals("SLOTS")) {
-                        play(new SlotsGame(), new SlotsPlayer());
-//                    } else if (gameSelectionInput.equals("NUMBERGUESS")) {
-//                        play(new HigherCardGame(), new HigherCardPlayer());
-
-                    } else if (gameSelectionInput.equals("Trivia")){
+                    if (gameSelectionInput.equalsIgnoreCase("SLOTS")) {
+                        play(new SlotMachine(), new SlotsPlayer());
+                    }else if (gameSelectionInput.equalsIgnoreCase("b")) {
+                        play(new BlackJack(), new BlackJackPlayer(casinoAccount));
+                    } else if (gameSelectionInput.equalsIgnoreCase("H")) {
+                        play(new HigherCardGame(), new HigherCardPlayer(casinoAccount));
+                    } else if (gameSelectionInput.equalsIgnoreCase("TRIVIA")){
                             play(new Trivia(), new TriviaPlayer(casinoAccount));
-                        }
-
-                     else {
-                        // TODO - implement better exception handling
+                    } else {
                         String errorMessage = "[ %s ] is an invalid game selection";
                         throw new RuntimeException(String.format(errorMessage, gameSelectionInput));
                     }
@@ -79,6 +77,7 @@ public class Casino implements Runnable {
                 CasinoAccount newAccount = casinoAccountManager.createAccount(accountName, accountPassword);
                 casinoAccountManager.registerAccount(newAccount);
             }
+            casinoAccountManager.saveFile();
         } while (!"logout".equals(arcadeDashBoardInput));
     }
 

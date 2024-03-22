@@ -26,7 +26,6 @@ public class HigherCardGame implements GameInterface {
     @Override
     public boolean add(PlayerInterface player) {
         player1= new Player(player.getArcadeAccount().getName(),player.getArcadeAccount().getBalance());
-        //TODO: change this
         return true;
     }
     @Override
@@ -63,6 +62,8 @@ public class HigherCardGame implements GameInterface {
             playAgain = false;
         } else if(console.getStringInput("Would you like to play again?").equalsIgnoreCase("no")) {
             playAgain = false;
+        } else {
+            //TODO : print invalid
         }
     }
 
