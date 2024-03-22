@@ -7,7 +7,7 @@ public class FlipCoinPlayer implements PlayerInterface {
 
     private CasinoAccount arcadeAccount;
 
-    FlipCoinPlayer(CasinoAccount arcadeAccount){
+    public FlipCoinPlayer(CasinoAccount arcadeAccount){
         this.arcadeAccount = arcadeAccount;
     }
 
@@ -18,13 +18,17 @@ public class FlipCoinPlayer implements PlayerInterface {
 
    @Override
    public Boolean play() {
-        return true;
+        return this.play();
+    }
+    @Override
+    public Double placeBets(double moneyToBet) {
+        return moneyToBet;
     }
 
 //    @Override
 //    public <SomeReturnType> SomeReturnType play() {
 //        FlipCoin flipCoin = new FlipCoin();
-//        flipCoin.playGame();
+//        flipCoin.run();
 //        return null;
 //    }
 }

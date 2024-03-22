@@ -13,4 +13,6 @@ public interface PlayerInterface {
     CasinoAccount getArcadeAccount();
 
     <SomeReturnType> SomeReturnType play();
+
+    Double placeBets(double moneyToBet);
 }

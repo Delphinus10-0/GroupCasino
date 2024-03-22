@@ -10,7 +10,7 @@ public class SlotGame implements GameInterface {
     private static final int MATCH_MULTIPLIER = 10;
     Player player1;
     @Override
-    public void Runplay(){
+    public void run() {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
         System.out.println("Welcome to the SlotGame!");
@@ -60,17 +60,20 @@ public class SlotGame implements GameInterface {
     }
 
     @Override
+    public void Runplay() {
+
+    }
+
+    @Override
     public boolean add(PlayerInterface player) {
-        player1= new Player(player.getArcadeAccount().getName(),player.getArcadeAccount().getBalance());
+        player1 = new Player(player.getArcadeAccount().getName(),player.getArcadeAccount().getBalance());
         return true;
     }
     @Override
     public boolean remove(PlayerInterface player) {
         return false;
     }
-    @Override
-    public void run() {
-    }
+
     @Override
     public void play() {
     }
