@@ -5,7 +5,7 @@ public class Player {
     Integer totalChips;
     int[] tally = {0, 0};
 
-    public Player(String name, Integer totalChips, int tally) {
+    public Player(String name, Integer totalChips) {
         this.name = name;
         this.totalChips = totalChips;
         this.tally = new int[]{tally};
