@@ -1,6 +1,7 @@
 package com.github.zipcodewilmington.casino.games.HigherCards;
 
 import com.github.zipcodewilmington.casino.CasinoAccount;
+import com.github.zipcodewilmington.casino.Gambler;
 import com.github.zipcodewilmington.casino.GamblingGame;
 import com.github.zipcodewilmington.casino.PlayerInterface;
 
@@ -10,9 +11,6 @@ import com.github.zipcodewilmington.casino.PlayerInterface;
 public class HigherCardPlayer implements PlayerInterface, GamblingGame {
     private CasinoAccount casinoAccount;
     private int totalChips;
-    private int[] tally; // to keep track of win/loss ratio
-
-
     public HigherCardPlayer(CasinoAccount casinoAccount) {
         this.casinoAccount = casinoAccount;
         this.totalChips = casinoAccount.getBalance();
@@ -38,16 +36,9 @@ public class HigherCardPlayer implements PlayerInterface, GamblingGame {
         this.totalChips = totalChips;
     }
 
-    public int[] getTally() {
-        return tally;
-    }
-
-    public void setTally(int[] tally) {
-        this.tally = tally;
-    }
-
     @Override
     public Double placeBets(double moneyToBet) {
         return moneyToBet;
     }
+
 }

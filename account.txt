@@ -1,4 +1,6 @@
-a,pass,0
-Angel,ammu,0
-a,p,100
-Ann,pass,0
+Ann,pass,300
+a,p,200
+a,pa,300
+a,pass,300
+Angel,ammu,300
+a,pa,0
