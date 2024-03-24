@@ -27,6 +27,10 @@ public class HigherCardGame implements GameInterface {
     public HigherCardGame(Player player) {
     }
 
+    public HigherCardGame(CasinoAccount casinoAccount) {
+    }
+
+
     @Override
     public void Runplay() {
 
@@ -67,12 +71,12 @@ public class HigherCardGame implements GameInterface {
 
     public void repeat() {
         if(player1.getTotalChips() == 0) {
-            console.println("You are out of balance. You may no longer play\n");
+            IOConsole.println("You are out of balance. You may no longer play\n");
             playAgain = false;
-        } else if(console.getStringInput("Would you like to play again?").equalsIgnoreCase("no")) {
+        } else if(IOConsole.getStringInput("Would you like to play again?").equalsIgnoreCase("no")) {
             playAgain = false;
         } else {
-            //TODO : print invalid
+            IOConsole.println("Invalid Input");
         }
     }
 
@@ -110,6 +114,9 @@ public class HigherCardGame implements GameInterface {
     }
 
     public boolean badBet() {
+        if (this.bet == null) {
+            return true; // Consider it a bad bet if bet is null
+        }
         return (bet > player1.getTotalChips() || bet < 0);
     }
 

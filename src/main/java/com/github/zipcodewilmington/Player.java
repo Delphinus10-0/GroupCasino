@@ -2,7 +2,7 @@ package com.github.zipcodewilmington;
 
 public class Player {
     String name;
-    Integer totalChips;
+    Integer totalChips ;
 
     public Player(String name, Integer totalChips) {
         this.name = name;

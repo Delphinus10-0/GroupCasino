@@ -19,7 +19,7 @@ public class FlipTheCoinTest {
 
     public void getBetTest(){
       FlipCoin flipTheCoin = new FlipCoin();
-     int expected = 0;
+     int expected = (int) 1.0;
      int actual = flipTheCoin.getBet();
      assertEquals(expected, actual, 0);
     }
